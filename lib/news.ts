@@ -2,7 +2,13 @@ import fs from 'fs';
 import path from 'path';
 import { DailyNews, NewsIndex } from './types';
 
-const dataDir = path.join(process.cwd(), 'data');
+// 获取数据目录路径
+function getDataDir(): string {
+  // 在 Next.js 构建时，process.cwd() 是项目根目录
+  return path.join(process.cwd(), 'data');
+}
+
+const dataDir = getDataDir();
 
 export function getNewsIndex(): NewsIndex | null {
   try {
