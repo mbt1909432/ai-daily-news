@@ -147,9 +147,24 @@ ${wechatHTML}
           zIndex: 100,
         }}
       >
-        <h1 style={{ color: '#fff', fontSize: '18px', margin: 0 }}>
-          微信公众号导出
-        </h1>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+          <a
+            href="/"
+            style={{
+              color: '#00d4ff',
+              textDecoration: 'none',
+              fontSize: '14px',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '4px',
+            }}
+          >
+            ← 返回首页
+          </a>
+          <h1 style={{ color: '#fff', fontSize: '18px', margin: 0 }}>
+            微信公众号导出
+          </h1>
+        </div>
         <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
           <a
             href={`data:text/html;charset=utf-8,${encodeURIComponent(fullHTML)}`}
