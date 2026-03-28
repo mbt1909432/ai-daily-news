@@ -5,7 +5,7 @@ export default function WechatPage() {
 
   if (!newsData) {
     return (
-      <div style={{ padding: '20px', textAlign: 'center' }}>
+      <div style={{ padding: '40px', textAlign: 'center', background: '#1a1a2e', minHeight: '100vh', color: '#fff' }}>
         暂无新闻数据
       </div>
     );
@@ -42,10 +42,10 @@ export default function WechatPage() {
 
   // 按分类分组
   const newsByCategory = {
-    major: newsData.news.filter(n => n.category === 'major'),
-    tools: newsData.news.filter(n => n.category === 'tools'),
-    business: newsData.news.filter(n => n.category === 'business'),
-    policy: newsData.news.filter(n => n.category === 'policy'),
+    major: newsData.news.filter((n) => n.category === 'major'),
+    tools: newsData.news.filter((n) => n.category === 'tools'),
+    business: newsData.news.filter((n) => n.category === 'business'),
+    policy: newsData.news.filter((n) => n.category === 'policy'),
   };
 
   const wechatHTML = `
@@ -68,16 +68,17 @@ export default function WechatPage() {
   <!-- 分类新闻 -->
   ${Object.entries(newsByCategory)
     .filter(([_, news]) => news.length > 0)
-    .map(([cat, news]) => `
+    .map(([cat, news]) => {
+      const category = cat as keyof typeof categoryConfig;
+      return `
   <section style="margin-bottom:24px;">
     <h2 style="font-size:16px;font-weight:600;margin:0 0 12px 0;padding-bottom:8px;border-bottom:2px solid #00d4ff;">
-      ${categoryConfig[cat as keyof typeof categoryConfig].icon} ${categoryConfig[cat as keyof typeof categoryConfig].title}
+      ${categoryConfig[category].icon} ${categoryConfig[category].title}
     </h2>
     ${news
-      .map(
-        (n) => `
+      .map((n) => `
     <div style="margin-bottom:16px;padding:12px;background:#f8f9fa;border-radius:8px;">
-      ${n.badge ? `<span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;margin-bottom:8px;${badgeColors[n.badge] || 'background:#666;color:#fff'}">${n.badge}</span>` : ''}
+      ${n.badge ? `<span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;margin-bottom:8px;${badgeColors[n.badge as keyof typeof badgeColors] || 'background:#666;color:#fff'}">${n.badge}</span>` : ''}
       <h3 style="font-size:15px;font-weight:600;margin:${n.badge ? '8px' : '0'} 0 8px 0;color:#000;line-height:1.5;">
         ${n.title}
       </h3>
@@ -95,11 +96,11 @@ export default function WechatPage() {
         📰 ${n.source}
       </p>
     </div>
-    `
-      )
+    `)
       .join('')}
   </section>
-    `)
+    `;
+    })
     .join('')}
 
   <!-- 底部 -->
@@ -115,12 +116,25 @@ export default function WechatPage() {
 </section>
   `;
 
+  // 完整的 HTML 页面（用于下载）
+  const fullHTML = `<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>今日 AI 最前沿 - ${formatDate(newsData.date)}</title>
+</head>
+<body style="margin:0;padding:0;background:#fff;">
+${wechatHTML}
+</body>
+</html>`;
+
   return (
     <div style={{ minHeight: '100vh', background: '#1a1a2e' }}>
       {/* 顶部工具栏 */}
       <div
         style={{
-          position: 'sticky',
+          position: 'sticky' as const,
           top: 0,
           background: '#16213e',
           padding: '16px',
@@ -130,52 +144,28 @@ export default function WechatPage() {
           justifyContent: 'space-between',
           flexWrap: 'wrap',
           gap: '12px',
+          zIndex: 100,
         }}
       >
         <h1 style={{ color: '#fff', fontSize: '18px', margin: 0 }}>
           微信公众号导出
         </h1>
-        <div style={{ display: 'flex', gap: '12px' }}>
-          <button
-            onClick={() => {
-              navigator.clipboard.writeText(wechatHTML);
-              alert('HTML 已复制到剪贴板！\n\n直接粘贴到微信公众号编辑器即可');
-            }}
+        <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+          <a
+            href={`data:text/html;charset=utf-8,${encodeURIComponent(fullHTML)}`}
+            download={`ai-news-${newsData.date}.html`}
             style={{
               background: 'linear-gradient(135deg, #00d4ff, #7b2cbf)',
               color: '#fff',
-              border: 'none',
+              textDecoration: 'none',
               padding: '10px 20px',
               borderRadius: '8px',
-              cursor: 'pointer',
               fontSize: '14px',
               fontWeight: 600,
             }}
           >
-            📋 复制 HTML
-          </button>
-          <button
-            onClick={() => {
-              const blob = new Blob([wechatHTML], { type: 'text/html' });
-              const url = URL.createObjectURL(blob);
-              const a = document.createElement('a');
-              a.href = url;
-              a.download = `ai-news-${newsData.date}.html`;
-              a.click();
-              URL.revokeObjectURL(url);
-            }}
-            style={{
-              background: 'rgba(255,255,255,0.1)',
-              color: '#fff',
-              border: '1px solid rgba(255,255,255,0.2)',
-              padding: '10px 20px',
-              borderRadius: '8px',
-              cursor: 'pointer',
-              fontSize: '14px',
-            }}
-          >
-            💾 下载 HTML
-          </button>
+            💾 下载 HTML 文件
+          </a>
         </div>
       </div>
 
@@ -193,16 +183,17 @@ export default function WechatPage() {
           📝 使用方法
         </h3>
         <ol style={{ color: '#aaa', fontSize: '13px', margin: 0, paddingLeft: '20px' }}>
-          <li style={{ marginBottom: '8px' }}>点击「复制 HTML」按钮</li>
-          <li style={{ marginBottom: '8px' }}>打开微信公众号后台编辑器</li>
-          <li style={{ marginBottom: '8px' }}>直接 Ctrl+V 粘贴即可</li>
-          <li>根据需要微调格式后发布</li>
+          <li style={{ marginBottom: '8px' }}>点击「下载 HTML 文件」按钮</li>
+          <li style={{ marginBottom: '8px' }}>用浏览器打开下载的文件</li>
+          <li style={{ marginBottom: '8px' }}>全选 (Ctrl+A) 并复制 (Ctrl+C)</li>
+          <li style={{ marginBottom: '8px' }}>粘贴到微信公众号编辑器</li>
+          <li>微调后发布</li>
         </ol>
       </div>
 
       {/* 预览区域 - 模拟手机 */}
       <div style={{ padding: '0 16px 32px' }}>
-        <h2 style={{ color: '#666', fontSize: '14px', textAlign: 'center', margin: '0 0 16px 0' }}>
+        <h2 style={{ color: '#888', fontSize: '14px', textAlign: 'center', margin: '0 0 16px 0' }}>
           📱 手机预览效果
         </h2>
         <div
