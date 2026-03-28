@@ -12,15 +12,32 @@
 
 #### 1.1 主要新闻源
 
-| 来源 | URL | 类型 |
-|------|-----|------|
-| TechCrunch AI | https://techcrunch.com/category/artificial-intelligence/ | 综合科技媒体 |
-| The Verge AI | https://www.theverge.com/ai-artificial-intelligence | 综合科技媒体 |
-| VentureBeat AI | https://venturebeat.com/category/ai/ | 企业AI焦点 |
-| Reuters AI | https://www.reuters.com/technology/artificial-intelligence/ | 新闻通讯社 |
-| MIT Technology Review | https://www.technologyreview.com/topic/artificial-intelligence/ | 学术/深度 |
+| 来源 | 英文名 | URL | 类型 | 可信度 |
+|------|--------|-----|------|--------|
+| TechCrunch AI | TechCrunch | https://techcrunch.com/category/artificial-intelligence/ | 国际科技媒体 | ⭐⭐⭐⭐⭐ |
+| The Verge AI | The Verge | https://www.theverge.com/ai-artificial-intelligence | 国际科技媒体 | ⭐⭐⭐⭐⭐ |
+| VentureBeat AI | VentureBeat | https://venturebeat.com/category/ai/ | 企业AI焦点 | ⭐⭐⭐⭐ |
+| Reuters AI | Reuters | https://www.reuters.com/technology/artificial-intelligence/ | 新闻通讯社 | ⭐⭐⭐⭐⭐ |
+| MIT Technology Review | MIT Tech Review | https://www.technologyreview.com/topic/artificial-intelligence/ | 学术/深度 | ⭐⭐⭐⭐⭐ |
+| OpenAI Blog | OpenAI Official | https://openai.com/blog/ | 官方博客 | ⭐⭐⭐⭐⭐ |
+| Google AI Blog | Google Official | https://blog.google/technology/ai/ | 官方博客 | ⭐⭐⭐⭐⭐ |
+| Anthropic Blog | Anthropic Official | https://www.anthropic.com/news | 官方博客 | ⭐⭐⭐⭐⭐ |
+| 机器之心 | Synced | https://www.jiqizhixin.com/ | 国内媒体 | ⭐⭐⭐⭐ |
+| 量子位 | QbitAI | https://www.qbitai.com/ | 国内媒体 | ⭐⭐⭐⭐ |
 
-#### 1.2 采集工具
+#### 1.2 来源分类
+
+```typescript
+type SourceType =
+  | 'official'      // 官方博客（OpenAI、Google、Anthropic等）
+  | 'tech-media'    // 科技媒体（TechCrunch、The Verge等）
+  | 'news-agency'   // 新闻通讯社（Reuters、Bloomberg等）
+  | 'chinese-media' // 中文媒体（机器之心、量子位等）
+  | 'social'        // 社交媒体（Twitter/X、Reddit等）
+  | 'research'      // 学术研究（arXiv、论文等）
+```
+
+#### 1.3 采集工具
 
 ```
 工具: mcp__web_reader__webReader
@@ -30,7 +47,7 @@
   - with_images_summary: false
 ```
 
-#### 1.3 网络搜索
+#### 1.4 网络搜索
 
 ```
 工具: WebSearch
@@ -39,6 +56,7 @@
   - "OpenAI Google Anthropic AI model release"
   - "AI startup funding" after:[日期]
   - "AI breakthrough research" after:[日期]
+  - "人工智能 最新动态" after:[日期]
 ```
 
 ---
@@ -56,7 +74,7 @@
 #### 2.2 去重策略
 
 - 相同新闻多来源时，保留最权威来源
-- 优先级: 公司官方博客 > 权威媒体 > 聚合网站
+- 优先级: 官方博客 > 新闻通讯社 > 权威媒体 > 聚合网站
 
 #### 2.3 排除内容
 
@@ -71,26 +89,45 @@
 
 #### 3.1 新闻分类
 
-| 分类 | 图标 | 说明 |
-|------|------|------|
-| Major Announcements | 🔥 | 产品发布、模型发布、重大公司动态 |
-| Research & Papers | 🔬 | 学术突破、研究论文、新算法 |
-| Industry & Business | 💰 | 融资、并购、合作、市场分析 |
-| Tools & Applications | 🛠️ | 新工具、开源项目、应用场景 |
-| Policy & Ethics | 🌍 | 监管、政策、伦理讨论 |
+| 分类 | 图标 | 英文 | 说明 |
+|------|------|------|------|
+| 重大公告 | 🔥 | major | 产品发布、模型发布、重大公司动态 |
+| 工具与应用 | 🛠️ | tools | 新工具、开源项目、应用场景 |
+| 行业与商业 | 💰 | business | 融资、并购、合作、市场分析 |
+| 政策与伦理 | 🌍 | policy | 监管、政策、伦理讨论 |
 
-#### 3.2 新闻字段
+#### 3.2 新闻标签 (Badge)
+
+| 标签 | 英文 | 颜色 | 说明 |
+|------|------|------|------|
+| 热门 | HOT | 红色 | 重大新闻、广泛关注 |
+| 新品 | NEW | 蓝色 | 新产品/功能发布 |
+| 更新 | UPDATE | 紫色 | 产品/模型更新 |
+| 上市 | IPO | 橙色 | IPO相关 |
+| 法律 | LEGAL | 深蓝 | 法律/诉讼 |
+| 芯片 | CHIP | 绿色 | 芯片/硬件 |
+| 融资 | FUNDING | 黄色 | 融资/投资 |
+| 政策 | POLICY | 灰色 | 政策法规 |
+| 欧盟 | EU | 靛蓝 | 欧盟相关 |
+| 开源 | OPEN SOURCE | 绿色 | 开源项目 |
+
+#### 3.3 新闻数据结构
 
 ```json
 {
-  "id": "唯一ID (时间戳+序号)",
+  "id": "唯一ID (YYYYMMDD+序号)",
   "title": "标题",
   "summary": "摘要 (1-2句话)",
   "points": ["要点1", "要点2", "要点3"],
-  "source": "来源媒体",
-  "sourceUrl": "原文链接",
-  "publishedAt": "发布时间",
-  "category": "分类",
+  "source": {
+    "name": "TechCrunch",
+    "nameZh": "TechCrunch",
+    "type": "tech-media",
+    "url": "https://techcrunch.com/...",
+    "favicon": "https://techcrunch.com/favicon.ico"
+  },
+  "publishedAt": "发布时间 (ISO 8601)",
+  "category": "分类 (major/tools/business/policy)",
   "badge": "标签 (HOT/NEW/UPDATE等)"
 }
 ```
@@ -125,12 +162,12 @@
 
 # 2. 整理新闻数据
 过滤、分类、去重
+标记来源信息和类型
 生成 JSON 数据文件
 
 # 3. 更新项目文件
 更新 /data/news/YYYY-MM-DD.json
 更新 /data/index.json
-更新 /data/latest.json
 
 # 4. 提交到 Git
 git add .
@@ -146,26 +183,63 @@ Git Push → GitHub → Vercel 自动构建 → 网站更新
 
 ---
 
+## 新闻来源标记规范
+
+### 来源显示格式
+
+每条新闻必须在标题下方显示来源：
+
+```
+📰 来源：TechCrunch · 2小时前
+```
+
+### 来源图标
+
+根据来源类型显示不同图标：
+
+| 类型 | 图标 | 示例 |
+|------|------|------|
+| 官方博客 | 🏢 | OpenAI、Google、Anthropic |
+| 科技媒体 | 📰 | TechCrunch、The Verge |
+| 新闻通讯社 | 📡 | Reuters、Bloomberg |
+| 中文媒体 | 🇨🇳 | 机器之心、量子位 |
+| 学术研究 | 📚 | arXiv、论文 |
+| 社交媒体 | 💬 | Twitter/X、Reddit |
+
+### 来源链接
+
+每条新闻必须包含原文链接，点击可跳转：
+
+```html
+<a href="https://techcrunch.com/..." target="_blank">
+  📰 TechCrunch
+</a>
+```
+
+---
+
 ## 项目结构
 
 ```
 ai-news-daily/
 ├── app/                    # Next.js App Router
 │   ├── page.tsx           # 首页
+│   ├── wechat/            # 微信导出页面
 │   ├── layout.tsx         # 布局
 │   └── globals.css        # 全局样式
 ├── components/            # React 组件
 │   ├── NewsCard.tsx       # 新闻卡片
 │   ├── CategorySection.tsx # 分类区块
-│   └── ...
+│   ├── Header.tsx         # 页头
+│   └── Footer.tsx         # 页脚
 ├── data/                  # 新闻数据
 │   ├── index.json         # 索引
-│   ├── latest.json        # 最新新闻
 │   └── news/              # 按日期存储
 │       ├── 2026-03-28.json
 │       └── ...
 ├── lib/                   # 工具函数
-│   └── news.ts            # 数据读取
+│   ├── news.ts            # 数据读取
+│   └── types.ts           # 类型定义
 ├── public/                # 静态资源
 ├── WORKFLOW.md            # 本文档
 ├── README.md              # 项目说明
@@ -201,8 +275,8 @@ ai-news-daily/
 {
   "date": "2026-03-28",
   "generatedAt": "2026-03-28T08:00:00Z",
-  "sources": ["TechCrunch", "The Verge", "VentureBeat"],
-  "totalNews": 15,
+  "sources": ["TechCrunch", "The Verge", "VentureBeat", "Reuters"],
+  "totalNews": 16,
   "categories": {
     "major": 3,
     "tools": 6,
@@ -233,7 +307,7 @@ ai-news-daily/
 }
 ```
 
-### latest.json
+### index.json
 
 ```json
 {
@@ -257,3 +331,5 @@ ai-news-daily/
 3. **去重**: 同一新闻不重复出现在多个分类
 4. **平衡**: 各分类新闻数量尽量均衡
 5. **质量**: 优先权威来源，避免营销内容
+6. **来源标记**: 每条新闻必须明确标记来源媒体
+7. **可信度**: 优先显示官方来源和高可信度媒体
