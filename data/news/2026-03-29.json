@@ -1,0 +1,141 @@
+{
+  "date": "2026-03-29",
+  "generatedAt": "2026-03-29T08:00:00Z",
+  "sources": ["TechCrunch", "The Verge"],
+  "totalNews": 8,
+  "categories": {
+    "major": 2,
+    "tools": 3,
+    "business": 2,
+    "policy": 1
+  },
+  "news": [
+    {
+      "id": "20260329001",
+      "title": "音乐行业悄悄拥抱 AI：\"不问不说\"政策盛行",
+      "summary": "Rolling Stone 报道，音乐行业已经普遍采用 AI 技术，但没有人愿意承认。制作人 Young Guru 估计，超过一半的采样类嘻哈音乐现在是通过 AI 制作的。",
+      "points": [
+        "乡村音乐和其他流派的艺术家都在使用 AI 进行编曲实验、创作样本素材",
+        "制作人 Young Guru 估计超过一半的采样类嘻哈音乐现在通过 AI 制作",
+        "音乐人 Michelle Lewis 表示，没有人愿意承认使用 AI"
+      ],
+      "source": "The Verge",
+      "sourceUrl": "https://www.theverge.com/ai-artificial-intelligence",
+      "publishedAt": "2026-03-27T15:00:00Z",
+      "category": "major",
+      "badge": "HOT"
+    },
+    {
+      "id": "20260329002",
+      "title": "Google AI 搜索工具被指控泄露 Epstein 幸存者个人信息",
+      "summary": "一起集体诉讼指控 Google 的 AI 搜索工具泄露了 Jeffrey Epstein 性虐待幸存者的个人数据。",
+      "points": [
+        "原告称 Google 未能删除、取消索引或阻止访问相关材料",
+        "诉讼同时针对特朗普政府",
+        "引发对 AI 搜索工具隐私保护的担忧"
+      ],
+      "source": "The Verge",
+      "sourceUrl": "https://www.theverge.com/ai-artificial-intelligence",
+      "publishedAt": "2026-03-27T12:00:00Z",
+      "category": "policy",
+      "badge": "LEGAL"
+    },
+    {
+      "id": "20260329003",
+      "title": "Anthropic 安全漏洞泄露下一代模型\"Mythos\"详情",
+      "summary": "Anthropic 发生安全漏洞，导致其下一代 AI 模型\"Mythos\"的详细信息泄露，包括 CEO 专属活动等内部信息。",
+      "points": [
+        "新模型命名为\"Mythos\"",
+        "泄露的\"非安全数据存储\"中包含 CEO 专属活动详情",
+        "Anthropic 尚未对此发表官方回应"
+      ],
+      "source": "The Verge",
+      "sourceUrl": "https://www.theverge.com/ai-artificial-intelligence",
+      "publishedAt": "2026-03-27T10:00:00Z",
+      "category": "major",
+      "badge": "HOT"
+    },
+    {
+      "id": "20260329004",
+      "title": "Google \"Live\" AI 搜索助手支持更多语言",
+      "summary": "Google 的实时 AI 搜索助手现在可以处理数十种更多语言的对话。",
+      "points": [
+        "大幅扩展语言支持范围",
+        "提升多语言对话体验",
+        "增强实时搜索能力"
+      ],
+      "source": "The Verge",
+      "sourceUrl": "https://www.theverge.com/ai-artificial-intelligence",
+      "publishedAt": "2026-03-26T14:00:00Z",
+      "category": "tools",
+      "badge": "UPDATE"
+    },
+    {
+      "id": "20260329005",
+      "title": "Meta 准备发布两款新款 Ray-Ban AI 眼镜",
+      "summary": "Meta 正在准备推出两款新的 Ray-Ban 智能眼镜，继续扩展其可穿戴 AI 设备产品线。",
+      "points": [
+        "两款新机型正在开发中",
+        "欧盟电池规则阻碍了在欧洲的发布计划",
+        "预计将继续增强 AI 功能"
+      ],
+      "source": "The Verge",
+      "sourceUrl": "https://www.theverge.com/ai-artificial-intelligence",
+      "publishedAt": "2026-03-26T12:00:00Z",
+      "category": "tools",
+      "badge": "NEW"
+    },
+    {
+      "id": "20260329006",
+      "title": "Apple 与 Google 达成协议，使用 Gemini 训练小型 AI 模型",
+      "summary": "据报道，Apple 已与 Google 达成协议，可以完全访问 Gemini，用于通过蒸馏技术训练\"学生\"AI 模型。",
+      "points": [
+        "Apple 拥有 Gemini 数据中心的完全访问权限",
+        "通过蒸馏技术训练适合 Apple 设备的小型模型",
+        "减少计算能力需求，优化设备端 AI"
+      ],
+      "source": "The Verge",
+      "sourceUrl": "https://www.theverge.com/ai-artificial-intelligence",
+      "publishedAt": "2026-03-25T10:00:00Z",
+      "category": "tools",
+      "badge": "NEW"
+    },
+    {
+      "id": "20260329007",
+      "title": "Meta 裁员数百人，同时大举投资 AI",
+      "summary": "Meta 正在进行裁员，同时将大量资金投入 AI 领域。",
+      "points": [
+        "裁员数百名员工",
+        "持续加大 AI 投资力度",
+        "反映了公司战略重心向 AI 转移"
+      ],
+      "source": "The Verge",
+      "sourceUrl": "https://www.theverge.com/ai-artificial-intelligence",
+      "publishedAt": "2026-03-25T14:00:00Z",
+      "category": "business",
+      "badge": "FUNDING"
+    },
+    {
+      "id": "20260329008",
+      "title": "Intel 发布 Arc Pro B70\"Big Battlemage\"GPU",
+      "summary": "Intel 发布了新的 Arc Pro B70 桌面 GPU，配备 32GB 显存，专为 AI 设计，起价 949 美元。",
+      "points": [
+        "32GB VRAM，最多 32 个 Xe2 核心",
+        "Intel 参考设计售价 949 美元",
+        "主要面向 AI 工作负载，非游戏导向"
+      ],
+      "source": "The Verge",
+      "sourceUrl": "https://www.theverge.com/ai-artificial-intelligence",
+      "publishedAt": "2026-03-25T16:00:00Z",
+      "category": "business",
+      "badge": "CHIP"
+    }
+  ],
+  "summary": [
+    "音乐行业 AI 使用泛滥：超过一半采样类嘻哈音乐通过 AI 制作，但从业者不愿承认",
+    "Anthropic 安全漏洞：下一代模型\"Mythos\"详情泄露，引发安全担忧",
+    "Google AI 搜索隐私风波：被指控泄露 Epstein 幸存者个人信息",
+    "Apple 与 Google 合作：使用 Gemini 训练小型 AI 模型，优化设备端 AI",
+    "Meta 战略调整：裁员同时大举投资 AI，准备发布新款 Ray-Ban AI 眼镜"
+  ]
+}
